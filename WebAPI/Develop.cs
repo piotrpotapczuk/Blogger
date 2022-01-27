@@ -2,5 +2,6 @@
 {
     public class Develop
     {
+        public int Id { get; set; }
     }
 }
