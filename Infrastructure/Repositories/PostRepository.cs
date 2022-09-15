@@ -20,27 +20,35 @@ namespace Infrastructure.Repositories
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+            return _posts;
         }
 
         public Post GetById(int id)
         {
-            throw new NotImplementedException();
+            return _posts.SingleOrDefault(p => p.Id == id);
         }
 
         public Post Add(Post post)
         {
-            throw new NotImplementedException();
+            
+            post.Id = _posts.Count + 1;
+            post.Created = DateTime.Now;
+
+            _posts.Add(post);
+
+            return post;
         }
 
 
         public void Update(Post post)
         {
-            throw new NotImplementedException();
+            post.LastModified = DateTime.Now;
+            post.LastModifiedBy = "Admin";
+
         }
         public void Delete(Post post)
         {
-            throw new NotImplementedException();
+            _posts.Remove(post);    
         }
     }
 }
