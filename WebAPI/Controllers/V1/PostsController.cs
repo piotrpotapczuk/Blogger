@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Controllers.V1
 {
     [Route("api/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class PostsController : ControllerBase
     {
@@ -31,7 +32,7 @@ namespace WebAPI.Controllers
         public IActionResult Get(int id)
         {
             var post = _postService.GetPostById(id);
-            if(post == null)
+            if (post == null)
             {
                 return NotFound();
             }
@@ -43,7 +44,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult Create(CreatePostDto newPost)
         {
-           var post = _postService.AddNewPost(newPost);
+            var post = _postService.AddNewPost(newPost);
 
             return Created(uri: $"api/posts/{post.Id}", post);
         }
