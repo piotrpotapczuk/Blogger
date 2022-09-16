@@ -48,5 +48,23 @@ namespace WebAPI.Controllers
             return Created(uri: $"api/posts/{post.Id}", post);
         }
 
+        [SwaggerOperation(Summary = "Update a post")]
+        [HttpPut]
+        public IActionResult Update(UpdatePostDto updatePost)
+        {
+            _postService.UpdatePost(updatePost);
+
+            return NoContent();
+        }
+
+        [SwaggerOperation(Summary = "Delete a  post")]
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _postService.DeletePost(id);
+
+            return NoContent();
+        }
+
     }
 }
