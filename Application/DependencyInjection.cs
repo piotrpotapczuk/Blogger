@@ -16,6 +16,7 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ICosmosPostService, CosmosPostService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;
