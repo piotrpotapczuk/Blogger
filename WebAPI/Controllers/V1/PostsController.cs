@@ -1,5 +1,6 @@
 ﻿using Application.Dto;
 using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -23,6 +24,18 @@ namespace WebAPI.Controllers.V1
         public IActionResult Get()
         {
             var posts = _postService.GetAllPosts();
+
+            return Ok(posts);
+        }
+
+        [SwaggerOperation(Summary = "Retrives posts by title")]
+        [HttpGet("Search/{title}")]
+        public IActionResult Search(string title)
+        {
+           
+
+            var posts = _postService.GetAllPosts(title);
+           
 
             return Ok(posts);
         }

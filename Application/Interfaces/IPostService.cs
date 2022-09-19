@@ -11,6 +11,7 @@ namespace Application.Interfaces
     public interface IPostService
     {
         IEnumerable<PostDto> GetAllPosts();
+        IEnumerable<PostDto> GetAllPosts(string title);
 
         PostDto GetPostById(int id);
 

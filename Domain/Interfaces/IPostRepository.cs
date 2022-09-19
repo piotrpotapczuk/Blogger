@@ -10,12 +10,13 @@ namespace Domain.Interfaces
     public interface IPostRepository
     {
         IEnumerable<Post> GetAll();
+        IEnumerable<Post> GetAll(string title);
         Post GetById(int id);
 
         Post Add(Post post);
 
         void Update(Post post);
-        void Delete(Post post); 
+        void Delete(Post post);
 
 
     }

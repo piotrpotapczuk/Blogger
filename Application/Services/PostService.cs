@@ -54,6 +54,13 @@ namespace Application.Services
             return _mapper.Map<IEnumerable<PostDto>>(posts);
         }
 
+        public IEnumerable<PostDto> GetAllPosts(string title)
+        {
+            IEnumerable<Post> posts = _postRepository.GetAll(title);
+
+            return _mapper.Map<IEnumerable<PostDto>>(posts);
+        }
+
         public PostDto AddNewPost(CreatePostDto newPost)
         {
             if (string.IsNullOrEmpty(newPost.Title))
@@ -83,5 +90,7 @@ namespace Application.Services
 
             _postRepository.Delete(post);
         }
+
+        
     }
 }
