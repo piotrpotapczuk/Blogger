@@ -9,14 +9,14 @@ namespace Domain.Interfaces
 {
     public interface IPostRepository
     {
-        IEnumerable<Post> GetAll();
-        IEnumerable<Post> GetAll(string title);
-        Post GetById(int id);
+        Task<IEnumerable<Post>> GetAllAsync();
+        Task<IEnumerable<Post>> GetAllAsync(string title);
+        Task<Post> GetByIdAsync(int id);
 
-        Post Add(Post post);
+        Task<Post> AddAsync(Post post);
 
-        void Update(Post post);
-        void Delete(Post post);
+        Task UpdateAsync(Post post);
+        Task DeleteAsync(Post post);
 
 
     }

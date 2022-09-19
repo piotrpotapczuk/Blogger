@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,42 +28,44 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public IEnumerable<Post> GetAll()
+        public async Task<IEnumerable<Post>> GetAllAsync()
         {
-            return _context.Posts;
+            return await _context.Posts.ToListAsync();
         }
 
-        public IEnumerable<Post> GetAll(string title)
+        public async Task<IEnumerable<Post>> GetAllAsync(string title)
         {
 
-            return _context.Posts.Where(p => p.Title.ToLower() == title.ToLower()).OrderByDescending(p => p.Id);
+            return await _context.Posts.Where(p => p.Title.ToLower() == title.ToLower()).OrderByDescending(p => p.Id).ToListAsync();
         }
 
-        public Post GetById(int id)
+        public async Task<Post> GetByIdAsync(int id)
         {
-            return _context.Posts.SingleOrDefault(p => p.Id == id);
+            return await _context.Posts.SingleOrDefaultAsync(p => p.Id == id);
         }
 
-        public Post Add(Post post)
+        public async Task<Post> AddAsync(Post post)
         {
 
-            _context.Posts.Add(post);
-            _context.SaveChanges();
+            var createdPost = await _context.Posts.AddAsync(post);
+            await _context.SaveChangesAsync();
 
-            return post;
+            return createdPost.Entity;
         }
 
 
-        public void Update(Post post)
+        public async Task UpdateAsync(Post post)
         {
             _context.Posts.Update(post);
-            _context.SaveChanges();
-
+            await _context.SaveChangesAsync();
+            await Task.CompletedTask;
         }
-        public void Delete(Post post)
+
+        public async Task DeleteAsync(Post post)
         {
             _context.Posts.Remove(post);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+            await Task.CompletedTask;
         }
 
        
