@@ -4,10 +4,13 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using WebAPI.Filters;
+using WebAPI.Helpers;
+using WebAPI.Wrappers;
 
 namespace WebAPI.Controllers.V1
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
+    
     [Route("api/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
@@ -22,11 +25,14 @@ namespace WebAPI.Controllers.V1
 
         [SwaggerOperation(Summary = "Retrives all posts")]
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PaginationFilter paginationFilter)
         {
-            var posts = await _postService.GetAllPostsAsync();
+            var validPagiantionFilter = new PaginationFilter(paginationFilter.PageNumber, paginationFilter.PageSize);
 
-            return Ok(posts);
+            var posts = await _postService.GetAllPostsAsync(validPagiantionFilter.PageNumber, validPagiantionFilter.PageSize);
+            var totalRecords = await _postService.GetAllPostCountAsync();
+
+            return Ok(PaginationHelper.CreatePagedResponse(posts, validPagiantionFilter, totalRecords));
         }
 
         [SwaggerOperation(Summary = "Retrives posts by title")]
@@ -38,7 +44,7 @@ namespace WebAPI.Controllers.V1
             var posts = await _postService.GetAllPostsAsync(title);
            
 
-            return Ok(posts);
+            return Ok(new Response<IEnumerable<PostDto>>(posts));
         }
 
         [SwaggerOperation(Summary = "Retrives post by id")]
@@ -51,7 +57,7 @@ namespace WebAPI.Controllers.V1
                 return NotFound();
             }
 
-            return Ok(post);
+            return Ok(new Response<PostDto>(post));
         }
 
         [SwaggerOperation(Summary = "Create a new post")]
@@ -60,7 +66,7 @@ namespace WebAPI.Controllers.V1
         {
             var post = await _postService.AddNewPostAsync(newPost);
 
-            return Created(uri: $"api/posts/{post.Id}", post);
+            return Created(uri: $"api/posts/{post.Id}", new Response<PostDto>(post));
         }
 
         [SwaggerOperation(Summary = "Update a post")]
