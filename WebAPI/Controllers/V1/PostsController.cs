@@ -34,14 +34,14 @@ namespace WebAPI.Controllers.V1
 
         [SwaggerOperation(Summary = "Retrives all posts")]
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SortingFilter sortingFilter)
+        public async Task<IActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SortingFilter sortingFilter, [FromQuery] string filterBy = "")
         {
             var validPagiantionFilter = new PaginationFilter(paginationFilter.PageNumber, paginationFilter.PageSize);
             var validSortingFilter = new SortingFilter(sortingFilter.SortField, sortingFilter.Ascending);
 
             var posts = await _postService.GetAllPostsAsync(validPagiantionFilter.PageNumber, validPagiantionFilter.PageSize,
-                                                            validSortingFilter.SortField, validSortingFilter.Ascending);
-            var totalRecords = await _postService.GetAllPostCountAsync();
+                                                            validSortingFilter.SortField, validSortingFilter.Ascending, filterBy);
+            var totalRecords = await _postService.GetAllPostCountAsync(filterBy);
 
             return Ok(PaginationHelper.CreatePagedResponse(posts, validPagiantionFilter, totalRecords));
         }

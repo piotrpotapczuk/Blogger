@@ -10,8 +10,8 @@ namespace Application.Interfaces
 {
     public interface IPostService
     {
-        Task<IEnumerable<PostDto>> GetAllPostsAsync(int pageNumber, int pageSize, string sortField, bool acending);
-        Task<int> GetAllPostCountAsync();
+        Task<IEnumerable<PostDto>> GetAllPostsAsync(int pageNumber, int pageSize, string sortField, bool acending, string filterBy);
+        Task<int> GetAllPostCountAsync(string filterBy);
         Task<IEnumerable<PostDto>> GetAllPostsAsync(string title);
 
         Task<PostDto> GetPostByIdAsync(int id);

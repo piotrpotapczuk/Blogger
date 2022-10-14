@@ -9,9 +9,9 @@ namespace Domain.Interfaces
 {
     public interface IPostRepository
     {
-        Task<IEnumerable<Post>> GetAllAsync(int pageNumber, int pageSize, string sortField, bool ascending);
+        Task<IEnumerable<Post>> GetAllAsync(int pageNumber, int pageSize, string sortField, bool ascending, string filterBy);
 
-        Task<int> GetAllCountAsync();
+        Task<int> GetAllCountAsync(string filterBy);
         Task<IEnumerable<Post>> GetAllAsync(string title);
         Task<Post> GetByIdAsync(int id);
 
