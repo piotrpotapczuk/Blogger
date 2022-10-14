@@ -22,14 +22,25 @@ namespace WebAPI.Controllers.V1
             _postService = postService;
         }
 
+        [SwaggerOperation(Summary = "Retrives sort fields")]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Get()
+        {
+
+
+            return Ok(SortingHelper.GetSortFields().Select(x=>x.Key));
+        }
+
 
         [SwaggerOperation(Summary = "Retrives all posts")]
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PaginationFilter paginationFilter)
+        public async Task<IActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SortingFilter sortingFilter)
         {
             var validPagiantionFilter = new PaginationFilter(paginationFilter.PageNumber, paginationFilter.PageSize);
+            var validSortingFilter = new SortingFilter(sortingFilter.SortField, sortingFilter.Ascending);
 
-            var posts = await _postService.GetAllPostsAsync(validPagiantionFilter.PageNumber, validPagiantionFilter.PageSize);
+            var posts = await _postService.GetAllPostsAsync(validPagiantionFilter.PageNumber, validPagiantionFilter.PageSize,
+                                                            validSortingFilter.SortField, validSortingFilter.Ascending);
             var totalRecords = await _postService.GetAllPostCountAsync();
 
             return Ok(PaginationHelper.CreatePagedResponse(posts, validPagiantionFilter, totalRecords));

@@ -38,9 +38,9 @@ namespace Application.Services
             return _mapper.Map<PostDto>(post);
         }
 
-        public async Task<IEnumerable<PostDto>> GetAllPostsAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<PostDto>> GetAllPostsAsync(int pageNumber, int pageSize, string sortField, bool ascending)
         {
-            var posts = await _postRepository.GetAllAsync(pageNumber, pageSize);
+            var posts = await _postRepository.GetAllAsync(pageNumber, pageSize,  sortField,  ascending);
             /* manual 
             return posts.Select(post => new PostDto
             {
