@@ -6,6 +6,10 @@ using Infrastructure.Repositories;
 using Microsoft.OpenApi.Models;
 using WebAPI.Installers;
 
+using Microsoft.OData.Edm;
+using Microsoft.OpenApi.Models;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 

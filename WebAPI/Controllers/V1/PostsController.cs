@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Swashbuckle.AspNetCore.Annotations;
 using WebAPI.Filters;
 using WebAPI.Helpers;
@@ -26,13 +27,11 @@ namespace WebAPI.Controllers.V1
         [HttpGet("[action]")]
         public async Task<IActionResult> Get()
         {
-
-
             return Ok(SortingHelper.GetSortFields().Select(x=>x.Key));
         }
 
 
-        [SwaggerOperation(Summary = "Retrives all posts")]
+        [SwaggerOperation(Summary = "Retrives paged posts")]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SortingFilter sortingFilter, [FromQuery] string filterBy = "")
         {
@@ -44,6 +43,14 @@ namespace WebAPI.Controllers.V1
             var totalRecords = await _postService.GetAllPostCountAsync(filterBy);
 
             return Ok(PaginationHelper.CreatePagedResponse(posts, validPagiantionFilter, totalRecords));
+        }
+
+        [SwaggerOperation(Summary = "Retrives all posts")]
+        [EnableQuery]
+        [HttpGet("[action]")]
+        public IQueryable<PostDto> GetAll()
+        {
+            return _postService.GetAllPosts();
         }
 
         [SwaggerOperation(Summary = "Retrives posts by title")]

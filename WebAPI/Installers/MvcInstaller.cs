@@ -7,6 +7,8 @@ using Infrastructure;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.OData;
+
 
 namespace WebAPI.Installers
 {
@@ -25,7 +27,14 @@ namespace WebAPI.Installers
                 x.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
             });
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(option =>
+                {
+                    option.JsonSerializerOptions.WriteIndented = true;
+                });
+
+            services.AddControllers().AddOData(options =>
+                options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(100).SkipToken());
         }
     }
 }

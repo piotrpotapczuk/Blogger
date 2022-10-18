@@ -22,6 +22,14 @@ namespace Application.Services
             _postRepository = postRepository;
             _mapper = mapper;
         }
+
+        public IQueryable<PostDto> GetAllPosts()
+        {
+            var posts = _postRepository.GetAll();
+            return _mapper.ProjectTo<PostDto>(posts);
+        }
+
+
         public async Task<PostDto> GetPostByIdAsync(int id)
         {
             var post = await _postRepository.GetByIdAsync(id);
