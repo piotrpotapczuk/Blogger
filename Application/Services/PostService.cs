@@ -73,7 +73,7 @@ namespace Application.Services
             return await _postRepository.GetAllCountAsync(filterBy);
         }
 
-        public async Task<PostDto> AddNewPostAsync(CreatePostDto newPost)
+        public async Task<PostDto> AddNewPostAsync(CreatePostDto newPost, string userId)
         {
             if (string.IsNullOrEmpty(newPost.Title))
             {
@@ -81,6 +81,7 @@ namespace Application.Services
             }
 
             var post = _mapper.Map<Post>(newPost);
+            post.UserId = userId;
 
             var result = await _postRepository.AddAsync(post);
 
@@ -104,5 +105,23 @@ namespace Application.Services
             await _postRepository.DeleteAsync(post);
         }
 
+        public async Task<bool> UserOwnsPostAsync(int postId, string userId)
+        {
+            var post = await _postRepository.GetByIdAsync(postId);
+
+            if (post == null)
+            {
+                return false;
+            };
+
+            if(post.UserId != userId)
+            {
+                return false;
+            }
+
+            return true;
+
+
+        }
     }
 }

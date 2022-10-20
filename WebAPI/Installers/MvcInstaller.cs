@@ -18,6 +18,8 @@ namespace WebAPI.Installers
         {
             services.AddApplication();
             services.AddInfrastructure();
+            services.AddAuthorization();
+            
 
             services.AddApiVersioning(x =>
             {
@@ -33,6 +35,7 @@ namespace WebAPI.Installers
                     option.JsonSerializerOptions.WriteIndented = true;
                 });
 
+            
             services.AddControllers().AddOData(options =>
                 options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(100).SkipToken());
         }

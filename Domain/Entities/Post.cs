@@ -14,11 +14,19 @@ namespace Domain.Entities
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string Title { get; set; }
+
+        [Required]
         [MaxLength(2000)]
         public string Content { get; set; }
+
+        [Required]
+        [MaxLength(450)]
+        public string UserId { get; set; }
+
         public Post()
         {
 

@@ -17,6 +17,8 @@ namespace Application
         {
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICosmosPostService, CosmosPostService>();
+            services.AddTransient<UserResolverService>();
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;
