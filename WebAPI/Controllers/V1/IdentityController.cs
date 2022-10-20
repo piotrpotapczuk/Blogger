@@ -2,6 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using WebAPI.Models;
 using WebAPI.Wrappers;
 
@@ -60,5 +64,37 @@ namespace WebAPI.Controllers.V1
             });
         }
 
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login(LoginModel loginModel)
+        {
+            var user = await _userManager.FindByNameAsync(loginModel.Username);
+
+            if(user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
+            {
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
+
+                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+                var token = new JwtSecurityToken(
+                        expires: DateTime.Now.AddHours(2),
+                        claims: authClaims,
+                        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                    );
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo
+                });
+
+            }
+
+            return Unauthorized();
+        }
     }
 }
