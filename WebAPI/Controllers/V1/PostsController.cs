@@ -50,7 +50,7 @@ namespace WebAPI.Controllers.V1
         [HttpGet("[action]")]
         public IQueryable<PostDto> GetAll()
         {
-            return _postService.GetAllPosts();
+            return _postService.GetAllPostsAsync();
         }
 
         [SwaggerOperation(Summary = "Retrives posts by title")]
