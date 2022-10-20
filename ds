@@ -1,0 +1,92 @@
+[33mcommit b58061cc1d1ab1d39abe82fdbd695db6000ce004[m[33m ([m[1;36mHEAD -> [m[1;32mPP-02[m[33m)[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Mon Sep 19 20:22:35 2022 +0200
+
+    end  - Pagination
+
+[33mcommit 7cbe36c845af3d6b6a77cea7e7c470c4e4e90abd[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Mon Sep 19 15:11:44 2022 +0200
+
+    end - Przechowywanie i zarządzanie danymi z użyciem Azure Cosmos DB
+
+[33mcommit 9383ba273e4d340fd62126efbdca844e97a899a3[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Mon Sep 19 12:14:46 2022 +0200
+
+    End - Operacje asynchroniczne
+
+[33mcommit cebb9090304ad77100cf5031f267049a8c1d6950[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Mon Sep 19 11:16:34 2022 +0200
+
+    end - Przechowywanie i zarządzanie danymi z użyciem Entity Framework Core
+
+[33mcommit b2d997f0742d59bfd7334caa86faabe3a7ef0f29[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Fri Sep 16 13:19:15 2022 +0200
+
+    end - Wersjonowanie
+
+[33mcommit d88aa4674d8e51c0a0be896cefd09151e5eff73a[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Fri Sep 16 12:57:16 2022 +0200
+
+    END - Konfiguracja AutoMappera
+
+[33mcommit 03fc354d8a5600e7d4059f5309d1a85d6314410e[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Fri Sep 16 12:44:09 2022 +0200
+
+    end - Wstrzykiwanie zależności i rejestracja serwisów
+
+[33mcommit 7aae48e2f072779016b6ca223085fc37c79d95dc[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Fri Sep 16 12:07:57 2022 +0200
+
+    End - Usuwanie zasobu (metoda DELETE)
+
+[33mcommit ec401af848ebf2bee301bb4f7b739b4fb95717e5[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Fri Sep 16 11:44:15 2022 +0200
+
+    End - Tworzenie zasobu (metoda POST)
+
+[33mcommit 74dec58f71bd4dc903bb42ef72662075314fd0c0[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Thu Sep 15 15:23:14 2022 +0200
+
+    End -  Pobieranie zasobu (metoda GET)
+
+[33mcommit 6f7c13b791883b44e20efc0c06ea6361b28ebe8b[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Thu Sep 15 14:54:59 2022 +0200
+
+    changes before automapper
+
+[33mcommit 9dacd1f753141ffa5b9d97b598cfb5d8c8a1a1ab[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Thu Sep 15 14:36:07 2022 +0200
+
+    creating simple Post model with repos and methods
+
+[33mcommit 92aed913e4e0429ec50a9ba3f112135e38548569[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: 6345550 6fd9193
+Author: piotrpotapczuk <91548742+piotrpotapczuk@users.noreply.github.com>
+Date:   Thu Sep 15 13:53:22 2022 +0200
+
+    Merge pull request #1 from piotrpotapczuk/feature/PP-01
+    
+    create solution with clean architecture
+
+[33mcommit 6fd9193293619dfe2043b21c23d24c6c7a4cd56f[m
+Author: piotr.potapczuk <piotr.potapczuk@gmail.com>
+Date:   Thu Sep 15 13:48:56 2022 +0200
+
+    create solution with clean architecture
+
+[33mcommit 6345550fcbcd9f558a3cc8d216f2e115c4ff913f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: piotrpotapczuk <91548742+piotrpotapczuk@users.noreply.github.com>
+Date:   Thu Sep 15 12:57:07 2022 +0200
+
+    Initial commit
